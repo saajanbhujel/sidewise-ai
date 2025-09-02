@@ -24,7 +24,7 @@ const SidebarWrapper = () => {
         <Sidebar isVisible={isVisible} setIsVisible={setIsVisible} isSidebarHideOnMobile={isSidebarHideOnMobile} />
             ) : (
                 <>
-                    <button className="fixed top-4 left-4 flex items-center cursor-pointer">
+                    <button className="fixed top-4 left-4 z-99 flex items-center cursor-pointer">
                         <span
                             onClick={() => {setIsVisible(true);setIsSidebarHideOnMobile(false);localStorage.setItem("sidebarVisible", "true");}}
                             className="material-symbols-outlined"

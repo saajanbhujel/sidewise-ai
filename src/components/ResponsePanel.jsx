@@ -2,7 +2,7 @@ import React from "react";
 
 const ResponsePanel = ({ model }) => {
     return (
-        <div className="border rounded-xl w-[32%] min-w-[32%]">
+        <div className="border rounded-xl w-[max(32%,350px)] min-w-[max(32%,350px)]">
             <div className="border rounded-xl shadow-md p-2 flex gap-2 justify-between items-center">
                 <div className="flex items-center gap-2">
                     <svg
@@ -10,6 +10,7 @@ const ResponsePanel = ({ model }) => {
                         width="20"
                         height="20"
                         viewBox="0 0 24 24"
+                        fill="currentColor"
                         xmlns="http://www.w3.org/2000/svg"
                     >
                         <title>OpenAI</title>
@@ -19,15 +20,23 @@ const ResponsePanel = ({ model }) => {
                 </div>
                 <div className="flex gap-2 items-center">
                     <button className="flex cursor-pointer">
-                        <input type="checkbox" defaultChecked className="toggle toggle-sm" />
+                        <input
+                            type="checkbox"
+                            defaultChecked
+                            className="toggle toggle-sm"
+                        />
                     </button>
                     <button className="flex cursor-pointer">
                         <span className="material-symbols-outlined">hide</span>
                     </button>
                 </div>
             </div>
-            <div className="p-2 h-105">
-                <p>abcd efcg hijk lmnoabcdefcghijklmnoabcdhijklmnoabcd efcg hijk lmnoabcd efcg hijk lmnoabcd efcg hijk lmnoabcd efcg hijk lmnoabcd efcg hijk lmno</p>
+            <div className="p-2 h-120">
+                <p>
+                    abcd efcg hijk lmnoabcdefcghijklmnoabcdhijklmnoabcd efcg
+                    hijk lmnoabcd efcg hijk lmnoabcd efcg hijk lmnoabcd efcg
+                    hijk lmnoabcd efcg hijk lmno
+                </p>
             </div>
         </div>
     );
