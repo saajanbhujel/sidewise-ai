@@ -1,6 +1,47 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+
+body{
+  font-family: "Rethink Sans";
+}
+
+.sidebar-link {
+  @apply flex items-center border rounded text-base px-1 py-2 gap-2 hover:bg-gray-400;
+}
+
+/* For Chrome, Edge, Safari */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* For Firefox */
+.custom-scrollbar {
+  scrollbar-width: thin; /* auto | thin | none */
+  scrollbar-color: #888 #f1f1f1; /* thumb | track */
+}
+
 /*
 :root {
   --background: #ffffff;
