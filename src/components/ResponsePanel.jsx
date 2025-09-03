@@ -1,4 +1,5 @@
 import React from "react";
+import Conversation from "./Conversation";
 
 const ResponsePanel = ({ model }) => {
     return (
@@ -31,13 +32,7 @@ const ResponsePanel = ({ model }) => {
                     </button>
                 </div>
             </div>
-            <div className="p-2 h-120">
-                <p>
-                    abcd efcg hijk lmnoabcdefcghijklmnoabcdhijklmnoabcd efcg
-                    hijk lmnoabcd efcg hijk lmnoabcd efcg hijk lmnoabcd efcg
-                    hijk lmnoabcd efcg hijk lmno
-                </p>
-            </div>
+            <Conversation />
         </div>
     );
 };

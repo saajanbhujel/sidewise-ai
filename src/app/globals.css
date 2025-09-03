@@ -19,7 +19,7 @@ body{
 
 /* For Chrome, Edge, Safari */
 .custom-scrollbar::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
@@ -40,6 +40,10 @@ body{
 .custom-scrollbar {
   scrollbar-width: thin; /* auto | thin | none */
   scrollbar-color: #888 #f1f1f1; /* thumb | track */
+}
+
+.no-arrows::-webkit-scrollbar-button {
+  display: none;
 }
 
 /*

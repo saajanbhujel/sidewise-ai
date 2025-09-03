@@ -1,12 +1,18 @@
 "use client";
 
 import ResponsePanel from "@/components/ResponsePanel";
+import { useEffect } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 
 export default function Home() {
+    useEffect(() => {
+        console.log("This runs on every render child1!");
+        // Your code here
+    });
+
     return (
         <div className="relative w-full min-h-[calc(100vh-16px)] border rounded p-2 pt-10 flex flex-col gap-4 overflow-auto">
-            <div className="flex gap-1 overflow-auto custom-scrollbar scrollbar-hide-buttons pb-1">
+            <div className="flex gap-1 overflow-auto custom-scrollbar pb-1">
                 <ResponsePanel model="Chatgpt" />
                 <ResponsePanel model="Claude" />
                 <ResponsePanel model="Grok" />
@@ -21,6 +27,7 @@ export default function Home() {
                         className="w-full p-2 focus:outline-none resize-none text-lg"
                         placeholder="Type your question?..."
                     />
+
                     <button
                         type="submit"
                         className="btn w-20 rounded-lg"
