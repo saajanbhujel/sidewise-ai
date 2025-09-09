@@ -1,7 +1,7 @@
 import React from "react";
 import Conversation from "./Conversation";
 
-const ResponsePanel = ({ model }) => {
+const ResponsePanel = ({ model, modelMessages, onToggle }) => {
     return (
         <div className="border rounded-xl w-[max(32%,350px)] min-w-[max(32%,350px)]">
             <div className="border rounded-xl shadow-md p-2 flex gap-2 justify-between items-center">
@@ -25,6 +25,7 @@ const ResponsePanel = ({ model }) => {
                             type="checkbox"
                             defaultChecked
                             className="toggle toggle-sm"
+                            onClick={onToggle}
                         />
                     </button>
                     <button className="flex cursor-pointer">
@@ -32,7 +33,7 @@ const ResponsePanel = ({ model }) => {
                     </button>
                 </div>
             </div>
-            <Conversation />
+            <Conversation model={model} modelMessages={modelMessages} />
         </div>
     );
 };
