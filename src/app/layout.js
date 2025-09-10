@@ -41,9 +41,9 @@ export default function RootLayout({ children }) {
             >
                 <div className="p-2 flex gap-2 h-screen overflow-hidden">
                     <SidebarWrapper />
-                    <div className="flex flex-1 h-full overflow-auto">
+                    <main className="flex flex-1 h-full overflow-auto">
                         {children}
-                    </div>
+                    </main>
                 </div>
             </body>
         </html>

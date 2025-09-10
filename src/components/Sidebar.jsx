@@ -68,7 +68,7 @@ const Sidebar = ({ isVisible, setIsVisible, isSidebarHideOnMobile }) => {
                         />
                     </li>
                     <li>
-                        <Link href="/login" className="sidebar-link">
+                        <Link href="/configure" className="sidebar-link">
                                 <span className="material-symbols-outlined">
                                     settings
                                 </span>

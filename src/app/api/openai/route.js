@@ -5,6 +5,11 @@ export async function POST(req) {
     try {
         const { messages } = await req.json();
 
+        const groq = createGroq({
+            // custom settings
+            apiKey: "abcd",
+        });
+
         const result = streamText({
             model: groq("llama-3.1-8b-instant"),
             messages: convertToModelMessages(messages),
