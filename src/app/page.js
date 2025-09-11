@@ -1,11 +1,7 @@
 "use client";
 
-import ResponsePanel from "@/components/ResponsePanel";
-import { useChat } from "@ai-sdk/react";
-import { DefaultChatTransport } from "ai";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import TextareaAutosize from "react-textarea-autosize";
 
 export default function Home() {
     useEffect(() => {
@@ -43,6 +39,19 @@ export default function Home() {
                 />
             </svg>
         ),
+        gemini: (
+            <svg
+                role="img"
+                width="20"
+                height="20"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <title>Google Gemini</title>
+                <path d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81" />
+            </svg>
+        ),
         llama: (
             <svg
                 role="img"
@@ -76,16 +85,6 @@ export default function Home() {
         ),
     };
 
-    const [prompt, setPrompt] = useState("");
-    const [activeModels, setActiveModels] = useState({
-        openai: false,
-        claude: false,
-        gemini: false,
-        llama: false,
-        deepseek: false,
-        openaiGptOss120bChat: false,
-    });
-
     const [apiKeys, setApiKeys] = useState({
         groq: localStorage.getItem("groq_api_key") || "",
         openai: localStorage.getItem("openai_api_key") || "",
@@ -93,65 +92,39 @@ export default function Home() {
         gemini: localStorage.getItem("gemini_api_key") || "",
     });
 
-    const [selectedModels, setSelectedModels] = useState({
+    const [models, setModels] = useState({
         openai: false,
         claude: false,
         gemini: false,
         llama: false,
         deepseek: false,
-        openaiGptOss120bChat: false,
-    })
-
-    
-
-    const openaiChat = useChat({
-        transport: new DefaultChatTransport({
-            api: "/api/openai",
-            headers: () => ({
-                "X-API-KEY": apiKeys.openai,
-            }),
-        }),
+        openaiGptOss120b: false,
     });
 
-    const openaiGptOss120bChat = useChat({
-        transport: new DefaultChatTransport({
-            api: "/api/openai-gpt-oss-120b",
-            headers: () => ({
-                "X-API-KEY": apiKeys.groq,
-            }),
-        }),
-    });
+    useEffect(() => {
+        setModels({
+            openai: localStorage.getItem("openai_is_selected") === "true",
+            claude: localStorage.getItem("claude_is_selected") === "true",
+            gemini: localStorage.getItem("gemini_is_selected") === "true",
+            llama: localStorage.getItem("llama_is_selected") === "true",
+            deepseek: localStorage.getItem("deepseek_is_selected") === "true",
+            openaiGptOss120b:
+                localStorage.getItem("openaiGptOss120b_is_selected") ===
+                "true",
+        });
+    }, []);
 
-    const llamaChat = useChat({
-        transport: new DefaultChatTransport({
-            api: "/api/llama",
-            headers: () => ({
-                "X-API-KEY": apiKeys.groq,
-            }),
-        }),
-    });
+    function addModel(model) {
+        const newValue = !models[model];
+        setModels((prev) => ({ ...prev, [model]: newValue }));
+        localStorage.setItem(model + "_is_selected", newValue);
+    }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        //sendMessage({ text: prompt });
-
-        if (!prompt.trim()) return;
-
-        //if (activeModels.openai) openaiChat.sendMessage({ text: prompt });
-        if (activeModels.openaiGptOss120bChat)
-            openaiGptOss120bChat.sendMessage({ text: prompt });
-        if (activeModels.llama) llamaChat.sendMessage({ text: prompt });
-
-        //openaiChat.sendMessage({ text: prompt });
-        //llamaChat.sendMessage({ text: prompt });
-
-        setPrompt("");
-    };
-
-    const isDisabled =
-        openaiChat.status !== "ready" ||
-        openaiGptOss120bChat.status !== "ready" ||
-        llamaChat.status !== "ready";
+    function removeModel(model) {
+        const newValue = !models[model];
+        setModels((prev) => ({ ...prev, [model]: newValue }));
+        localStorage.removeItem(model + "_is_selected");
+    }
 
     return (
         <div className="relative w-full min-h-[calc(100vh-16px)] border rounded p-2 pt-10 flex flex-col gap-4 overflow-auto">
@@ -166,150 +139,198 @@ export default function Home() {
                 <div className="p-2 grid grid-cols-2 sm:grid-cols-3 place-items-center gap-4">
                     <div className="card card-border bg-base-200 w-full">
                         <div className="card-body">
-                            <h2 className="card-title">OpenAI</h2>
+                            <h2 className="card-title">
+                                {modelIcons.openai} OpenAI
+                            </h2>
                             <p className="hidden sm:block">
                                 A card component has a figure, a body part, and
                                 inside body there are title and actions parts
                             </p>
-                            <button className="btn btn-primary" disabled={!apiKeys.openai}>
-                                    {selectedModels.openai ? "Added" : "Add"}
-                            </button>
+                            {models.openai ? (
+                                <button
+                                    className="btn btn-error"
+                                    disabled={!apiKeys.openai}
+                                    onClick={function (e) {
+                                        removeModel("openai");
+                                    }}
+                                >
+                                    Remove
+                                </button>
+                            ) : (
+                                <button
+                                    className="btn btn-primary"
+                                    disabled={!apiKeys.openai}
+                                    onClick={function (e) {
+                                        addModel("openai");
+                                    }}
+                                >
+                                    Add
+                                </button>
+                            )}
                         </div>
                     </div>
                     <div className="card card-border bg-base-200 w-full">
                         <div className="card-body">
-                            <h2 className="card-title">Claude</h2>
+                            <h2 className="card-title">
+                                {modelIcons.claude} Claude
+                            </h2>
                             <p className="hidden sm:block">
                                 A card component has a figure, a body part, and
                                 inside body there are title and actions parts
                             </p>
-                            <button className="btn btn-primary" disabled={!apiKeys.claude}>
-                                    {selectedModels.claude ? "Added" : "Add"}
-                            </button>
+                            {models.claude ? (
+                                <button
+                                    className="btn btn-error"
+                                    disabled={!apiKeys.claude}
+                                    onClick={function (e) {
+                                        removeModel("claude");
+                                    }}
+                                >
+                                    Remove
+                                </button>
+                            ) : (
+                                <button
+                                    className="btn btn-primary"
+                                    disabled={!apiKeys.claude}
+                                    onClick={function (e) {
+                                        addModel("claude");
+                                    }}
+                                >
+                                    Add
+                                </button>
+                            )}
                         </div>
                     </div>
                     <div className="card card-border bg-base-200 w-full">
                         <div className="card-body">
-                            <h2 className="card-title">Gemini</h2>
+                            <h2 className="card-title">
+                                {modelIcons.gemini} Gemini
+                            </h2>
                             <p className="hidden sm:block">
                                 A card component has a figure, a body part, and
                                 inside body there are title and actions parts
                             </p>
-                            <button className="btn btn-primary" disabled={!apiKeys.gemini}>
-                                    {selectedModels.gemini ? "Added" : "Add"}
-                            </button>
+                            {models.gemini ? (
+                                <button
+                                    className="btn btn-error"
+                                    disabled={!apiKeys.gemini}
+                                    onClick={function (e) {
+                                        removeModel("gemini");
+                                    }}
+                                >
+                                    Remove
+                                </button>
+                            ) : (
+                                <button
+                                    className="btn btn-primary"
+                                    disabled={!apiKeys.gemini}
+                                    onClick={function (e) {
+                                        addModel("gemini");
+                                    }}
+                                >
+                                    Add
+                                </button>
+                            )}
                         </div>
                     </div>
                     <div className="card card-border bg-base-200 w-full">
                         <div className="card-body">
-                            <h2 className="card-title">OpenAI GPT OSS 120B</h2>
+                            <h2 className="card-title">
+                                {modelIcons.openai} GPT OSS
+                            </h2>
                             <p className="hidden sm:block">
                                 A card component has a figure, a body part, and
                                 inside body there are title and actions parts
                             </p>
-                            <button className="btn btn-primary" disabled={!apiKeys.groq}>
-                                    {selectedModels.openaiGptOss120bChat ? "Added" : "Add"}
-                            </button>
+                            {models.openaiGptOss120b ? (
+                                <button
+                                    className="btn btn-error"
+                                    disabled={!apiKeys.groq}
+                                    onClick={function (e) {
+                                        removeModel("openaiGptOss120b");
+                                    }}
+                                >
+                                    Remove
+                                </button>
+                            ) : (
+                                <button
+                                    className="btn btn-primary"
+                                    disabled={!apiKeys.groq}
+                                    onClick={function (e) {
+                                        addModel("openaiGptOss120b");
+                                    }}
+                                >
+                                    Add
+                                </button>
+                            )}
                         </div>
                     </div>
                     <div className="card card-border bg-base-200 w-full">
                         <div className="card-body">
-                            <h2 className="card-title">Meta Llama</h2>
+                            <h2 className="card-title">
+                                {modelIcons.llama} Meta Llama
+                            </h2>
                             <p className="hidden sm:block">
                                 A card component has a figure, a body part, and
                                 inside body there are title and actions parts
                             </p>
-                            <button className="btn btn-primary" disabled={!apiKeys.groq}>
-                                    {selectedModels.llama ? "Added" : "Add"}
-                            </button>
+                            {models.llama ? (
+                                <button
+                                    className="btn btn-error"
+                                    disabled={!apiKeys.groq}
+                                    onClick={function (e) {
+                                        removeModel("llama");
+                                    }}
+                                >
+                                    Remove
+                                </button>
+                            ) : (
+                                <button
+                                    className="btn btn-primary"
+                                    disabled={!apiKeys.groq}
+                                    onClick={function (e) {
+                                        addModel("llama");
+                                    }}
+                                >
+                                    Add
+                                </button>
+                            )}
                         </div>
-                        
                     </div>
                     <div className="card card-border bg-base-200 w-full">
                         <div className="card-body">
-                            <h2 className="card-title">Deepseek</h2>
+                            <h2 className="card-title">
+                                {modelIcons.deepseek} Deepseek
+                            </h2>
                             <p className="hidden sm:block">
                                 A card component has a figure, a body part, and
                                 inside body there are title and actions parts
                             </p>
-                            <button className="btn btn-primary" disabled={!apiKeys.groq}>
-                                    {selectedModels.deepseek ? "Added" : "Add"}
-                            </button>
+                            {models.deepseek ? (
+                                <button
+                                    className="btn btn-error"
+                                    disabled={!apiKeys.groq}
+                                    onClick={function (e) {
+                                        removeModel("deepseek");
+                                    }}
+                                >
+                                    Remove
+                                </button>
+                            ) : (
+                                <button
+                                    className="btn btn-primary"
+                                    disabled={!apiKeys.groq}
+                                    onClick={function (e) {
+                                        addModel("deepseek");
+                                    }}
+                                >
+                                    Add
+                                </button>
+                            )}
                         </div>
-                        
                     </div>
-                    
                 </div>
             </div>
-
-            {/*<div className="flex gap-1 overflow-auto custom-scrollbar pb-1">
-                <ResponsePanel
-                    model="OpenAI"
-                    modelIcon={modelIcons.openai}
-                    modelMessages={openaiChat.messages}
-                    onToggle={() =>
-                        setActiveModels((prev) => ({
-                            ...prev,
-                            openai: !prev.openai,
-                        }))
-                    }
-                />
-                <ResponsePanel
-                    model="GPT OSS 120B (OpenAI)"
-                    modelIcon={modelIcons.openai}
-                    modelMessages={openaiGptOss120bChat.messages}
-                    onToggle={() =>
-                        setActiveModels((prev) => ({
-                            ...prev,
-                            openaiGptOss120bChat: !prev.openaiGptOss120bChat,
-                        }))
-                    }
-                />
-                <ResponsePanel
-                    model="LLaMA (Meta)"
-                    modelIcon={modelIcons.llama}
-                    modelMessages={llamaChat.messages}
-                    onToggle={() =>
-                        setActiveModels((prev) => ({
-                            ...prev,
-                            llama: !prev.llama,
-                        }))
-                    }
-                />
-                <ResponsePanel
-                    model="Deepseek"
-                    modelIcon={modelIcons.deepseek}
-                />
-                <ResponsePanel model="Claude" modelIcon={modelIcons.claude} />
-            </div>*/}
-            <form onSubmit={handleSubmit} className="flex justify-center">
-                <div className="absolute bottom-3 shadow-lg w-[90%] bg-base-200 border rounded-xl flex flex-col items-end p-2 gap-2">
-                    <TextareaAutosize
-                        rows={1}
-                        minRows={1}
-                        maxRows={3}
-                        className="w-full p-2 focus:outline-none resize-none text-lg"
-                        placeholder="Ask me anything..."
-                        value={prompt}
-                        onChange={(e) => setPrompt(e.target.value)}
-                        disabled={isDisabled}
-                        onKeyDown={(e) => {
-                            if (e.key === "Enter" && !e.shiftKey) {
-                                e.preventDefault();
-                                handleSubmit(e);
-                            }
-                        }}
-                    />
-
-                    <button
-                        type="submit"
-                        className="btn btn-primary w-20 rounded-lg"
-                        disabled={isDisabled}
-                    >
-                        {isDisabled ? "..." : "Enter"}
-                    </button>
-                </div>
-            </form>
         </div>
     );
 }

@@ -1,18 +1,18 @@
 import { convertToModelMessages, streamText } from "ai";
-import { createGroq } from '@ai-sdk/groq';
+import { createGoogleGenerativeAI } from "@ai-sdk/google";
 
 export async function POST(req) {
     try {
-        const apiKey = req.headers.get("x-groq-api-key");
+        const apiKey = req.headers.get("x-gemini-api-key");
 
-        const groq = createGroq({
+        const google = createGoogleGenerativeAI({
             apiKey: apiKey,
         });
 
         const { messages } = await req.json();
 
         const result = streamText({
-            model: groq("llama-3.1-8b-instant"),
+            model: google("gemini-2.0-flash"),
             messages: convertToModelMessages(messages),
         });
 

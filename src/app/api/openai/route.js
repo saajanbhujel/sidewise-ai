@@ -3,7 +3,7 @@ import { createOpenAI } from "@ai-sdk/openai";
 
 export async function POST(req) {
     try {
-        const apiKey = req.headers.get("x-api-key");
+        const apiKey = req.headers.get("x-openai-api-key");
 
         if (!apiKey) {
             return new Response(JSON.stringify({ error: "Missing API key" }), {

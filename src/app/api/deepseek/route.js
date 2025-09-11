@@ -12,7 +12,7 @@ export async function POST(req) {
         const { messages } = await req.json();
 
         const result = streamText({
-            model: groq("llama-3.1-8b-instant"),
+            model: groq("deepseek-r1-distill-llama-70b"),
             messages: convertToModelMessages(messages),
         });
 

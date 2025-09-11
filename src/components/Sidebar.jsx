@@ -2,7 +2,6 @@ import Link from "next/link";
 import React from "react";
 
 const Sidebar = ({ isVisible, setIsVisible, isSidebarHideOnMobile }) => {
-
     return (
         <div
             className={`md:flex ${
@@ -27,6 +26,14 @@ const Sidebar = ({ isVisible, setIsVisible, isSidebarHideOnMobile }) => {
                 </div>
                 <div className="">
                     <ul className="flex flex-col gap-1">
+                        <li>
+                            <Link href="/" className="sidebar-link">
+                                <span className="material-symbols-outlined">
+                                    home
+                                </span>
+                                Home
+                            </Link>
+                        </li>
                         <li>
                             <Link href="/new" className="sidebar-link">
                                 <span className="material-symbols-outlined">
@@ -69,11 +76,11 @@ const Sidebar = ({ isVisible, setIsVisible, isSidebarHideOnMobile }) => {
                     </li>
                     <li>
                         <Link href="/configure" className="sidebar-link">
-                                <span className="material-symbols-outlined">
-                                    settings
-                                </span>
-                                Configure
-                            </Link>
+                            <span className="material-symbols-outlined">
+                                settings
+                            </span>
+                            Configure
+                        </Link>
                     </li>
                 </ul>
             </div>
