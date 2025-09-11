@@ -1,22 +1,30 @@
 import { convertToModelMessages, streamText } from "ai";
-import { groq } from "@ai-sdk/groq";
+import { createOpenAI } from "@ai-sdk/openai";
 
 export async function POST(req) {
     try {
-        const { messages } = await req.json();
+        const apiKey = req.headers.get("x-api-key");
 
-        const groq = createGroq({
-            // custom settings
-            apiKey: "abcd",
+        if (!apiKey) {
+            return new Response(JSON.stringify({ error: "Missing API key" }), {
+                status: 401,
+            });
+        }
+
+        const openai = createOpenAI({
+            // custom settings, e.g.
+            apiKey: apiKey,
         });
 
+        const { messages } = await req.json();
+
         const result = streamText({
-            model: groq("llama-3.1-8b-instant"),
+            model: openai("gpt-5-nano"),
             messages: convertToModelMessages(messages),
         });
 
         return result.toUIMessageStreamResponse();
-    } catch (eror) {
-        return new Response("Failed");
+    } catch (error) {
+        return new Response("Failed", { status: 500 });
     }
 }

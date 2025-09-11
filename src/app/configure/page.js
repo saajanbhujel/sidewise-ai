@@ -8,7 +8,6 @@ const page = () => {
         openai: "",
         claude: "",
         gemini: "",
-        deepseek: "",
     });
 
     useEffect(() => {
@@ -17,14 +16,15 @@ const page = () => {
             openai: localStorage.getItem("openai_api_key") || "",
             claude: localStorage.getItem("claude_api_key") || "",
             gemini: localStorage.getItem("gemini_api_key") || "",
-            deepseek: localStorage.getItem("deepseek_api_key") || "",
         };
         setApiKeys(savedApiKeys);
     }, []);
 
     function handleChange(model, e) {
         setApiKeys((prev) => ({ ...prev, [model]: e.target.value }));
+        localStorage.setItem(model + "_api_key", e.target.value);
     }
+
     return (
         <div className="w-full border rounded p-2 pt-10 flex flex-col gap-4 overflow-auto">
             <div className="flex flex-col gap-2 p-2 w-full text-center">
@@ -71,15 +71,6 @@ const page = () => {
                         value={apiKeys.gemini}
                         onChange={function (e) {
                             handleChange("gemini", e);
-                        }}
-                    />
-                    <input
-                        className="input w-full"
-                        type="password"
-                        placeholder="Enter your Deepseek API key"
-                        value={apiKeys.deepseek}
-                        onChange={function (e) {
-                            handleChange("deepseek", e);
                         }}
                     />
                     <button className="btn btn-primary w-[90%] rounded-lg m-auto">

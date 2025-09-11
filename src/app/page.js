@@ -3,7 +3,7 @@
 import ResponsePanel from "@/components/ResponsePanel";
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
-import { act, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 
 export default function Home() {
@@ -80,24 +80,41 @@ export default function Home() {
         openai: true,
         claude: true,
         llama: true,
-        deepseek: true
+        deepseek: true,
+        openaiGptOss120bChat: true,
     });
 
-    /*const { messages, sendMessage } = useChat({
-        transport: new DefaultChatTransport({
-            api: "/api/openai",
-        }),
-    });*/
+    const [apiKeys, setApiKeys] = useState({
+        groq: localStorage.getItem("groq_api_key") || "",
+        openai: localStorage.getItem("openai_api_key") || "",
+        claude: localStorage.getItem("claude_api_key") || "",
+        gemini: localStorage.getItem("gemini_api_key") || "",
+    });
 
     const openaiChat = useChat({
         transport: new DefaultChatTransport({
             api: "/api/openai",
+            headers: () => ({
+                "X-API-KEY": apiKeys.openai,
+            }),
+        }),
+    });
+
+    const openaiGptOss120bChat = useChat({
+        transport: new DefaultChatTransport({
+            api: "/api/openai-gpt-oss-120b",
+            headers: () => ({
+                "X-API-KEY": apiKeys.groq,
+            }),
         }),
     });
 
     const llamaChat = useChat({
         transport: new DefaultChatTransport({
             api: "/api/llama",
+            headers: () => ({
+                "X-API-KEY": apiKeys.groq,
+            }),
         }),
     });
 
@@ -107,7 +124,9 @@ export default function Home() {
 
         if (!prompt.trim()) return;
 
-        if (activeModels.openai) openaiChat.sendMessage({ text: prompt });
+        //if (activeModels.openai) openaiChat.sendMessage({ text: prompt });
+        if (activeModels.openaiGptOss120bChat)
+            openaiGptOss120bChat.sendMessage({ text: prompt });
         if (activeModels.llama) llamaChat.sendMessage({ text: prompt });
 
         //openaiChat.sendMessage({ text: prompt });
@@ -117,19 +136,32 @@ export default function Home() {
     };
 
     const isDisabled =
-        openaiChat.status !== "ready" || llamaChat.status !== "ready";
+        openaiChat.status !== "ready" || openaiGptOss120bChat.status !== "ready" || llamaChat.status !== "ready";
 
     return (
         <div className="relative w-full min-h-[calc(100vh-16px)] border rounded p-2 pt-10 flex flex-col gap-4 overflow-auto">
+            
+            
             <div className="flex gap-1 overflow-auto custom-scrollbar pb-1">
                 <ResponsePanel
-                    model="GPT OSS 120B (OpenAI)"
+                    model="OpenAI"
                     modelIcon={modelIcons.openai}
                     modelMessages={openaiChat.messages}
                     onToggle={() =>
                         setActiveModels((prev) => ({
                             ...prev,
                             openai: !prev.openai,
+                        }))
+                    }
+                />
+                <ResponsePanel
+                    model="GPT OSS 120B (OpenAI)"
+                    modelIcon={modelIcons.openai}
+                    modelMessages={openaiGptOss120bChat.messages}
+                    onToggle={() =>
+                        setActiveModels((prev) => ({
+                            ...prev,
+                            openaiGptOss120bChat: !prev.openaiGptOss120bChat,
                         }))
                     }
                 />
