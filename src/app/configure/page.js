@@ -10,7 +10,7 @@ const page = () => {
         gemini: "",
     });
 
-    useEffect(() => {
+    /*useEffect(() => {
         const savedApiKeys = {
             groq: localStorage.getItem("groq_api_key") || "",
             openai: localStorage.getItem("openai_api_key") || "",
@@ -18,7 +18,20 @@ const page = () => {
             gemini: localStorage.getItem("gemini_api_key") || "",
         };
         setApiKeys(savedApiKeys);
-    }, []);
+    }, []);*/
+
+    useEffect(() => {
+    if (typeof window !== "undefined") {
+      const savedApiKeys = {
+        groq: localStorage.getItem("groq_api_key") || "",
+        openai: localStorage.getItem("openai_api_key") || "",
+        claude: localStorage.getItem("claude_api_key") || "",
+        gemini: localStorage.getItem("gemini_api_key") || "",
+      };
+      setApiKeys(savedApiKeys);
+    }
+  }, []);
+
 
     function handleChange(model, e) {
         setApiKeys((prev) => ({ ...prev, [model]: e.target.value }));
