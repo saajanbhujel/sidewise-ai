@@ -10,7 +10,7 @@ const page = () => {
         gemini: "",
     });
 
-    /*useEffect(() => {
+    useEffect(() => {
         const savedApiKeys = {
             groq: localStorage.getItem("groq_api_key") || "",
             openai: localStorage.getItem("openai_api_key") || "",
@@ -18,9 +18,9 @@ const page = () => {
             gemini: localStorage.getItem("gemini_api_key") || "",
         };
         setApiKeys(savedApiKeys);
-    }, []);*/
+    }, []);
 
-    useEffect(() => {
+    /*useEffect(() => {
     if (typeof window !== "undefined") {
       const savedApiKeys = {
         groq: localStorage.getItem("groq_api_key") || "",
@@ -30,7 +30,7 @@ const page = () => {
       };
       setApiKeys(savedApiKeys);
     }
-  }, []);
+  }, []);*/
 
 
     function handleChange(model, e) {

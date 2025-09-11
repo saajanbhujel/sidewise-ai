@@ -85,12 +85,26 @@ export default function Home() {
         ),
     };
 
-    const [apiKeys, setApiKeys] = useState({
+    /*const [apiKeys, setApiKeys] = useState({
         groq: localStorage.getItem("groq_api_key") || "",
         openai: localStorage.getItem("openai_api_key") || "",
         claude: localStorage.getItem("claude_api_key") || "",
         gemini: localStorage.getItem("gemini_api_key") || "",
-    });
+    });*/
+
+    const [apiKeys, setApiKeys] = useState(() => {
+    if (typeof window !== "undefined") {
+      // Only access localStorage on the client
+      return {
+        groq: localStorage.getItem("groq_api_key") || "",
+        openai: localStorage.getItem("openai_api_key") || "",
+        claude: localStorage.getItem("claude_api_key") || "",
+        gemini: localStorage.getItem("gemini_api_key") || "",
+      };
+    }
+    // Fallback for SSR
+    return { groq: "", openai: "", claude: "", gemini: "" };
+  });
 
     const [models, setModels] = useState({
         openai: false,
