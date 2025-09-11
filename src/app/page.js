@@ -3,6 +3,7 @@
 import ResponsePanel from "@/components/ResponsePanel";
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 
@@ -77,11 +78,12 @@ export default function Home() {
 
     const [prompt, setPrompt] = useState("");
     const [activeModels, setActiveModels] = useState({
-        openai: true,
-        claude: true,
-        llama: true,
-        deepseek: true,
-        openaiGptOss120bChat: true,
+        openai: false,
+        claude: false,
+        gemini: false,
+        llama: false,
+        deepseek: false,
+        openaiGptOss120bChat: false,
     });
 
     const [apiKeys, setApiKeys] = useState({
@@ -90,6 +92,17 @@ export default function Home() {
         claude: localStorage.getItem("claude_api_key") || "",
         gemini: localStorage.getItem("gemini_api_key") || "",
     });
+
+    const [selectedModels, setSelectedModels] = useState({
+        openai: false,
+        claude: false,
+        gemini: false,
+        llama: false,
+        deepseek: false,
+        openaiGptOss120bChat: false,
+    })
+
+    
 
     const openaiChat = useChat({
         transport: new DefaultChatTransport({
@@ -136,13 +149,100 @@ export default function Home() {
     };
 
     const isDisabled =
-        openaiChat.status !== "ready" || openaiGptOss120bChat.status !== "ready" || llamaChat.status !== "ready";
+        openaiChat.status !== "ready" ||
+        openaiGptOss120bChat.status !== "ready" ||
+        llamaChat.status !== "ready";
 
     return (
         <div className="relative w-full min-h-[calc(100vh-16px)] border rounded p-2 pt-10 flex flex-col gap-4 overflow-auto">
-            
-            
-            <div className="flex gap-1 overflow-auto custom-scrollbar pb-1">
+            <div className="flex flex-col gap-10">
+                <p className="text-center text-lg">
+                    Start by adding your API keys on the{" "}
+                    <Link className="link link-primary" href="/configure">
+                        Configure
+                    </Link>{" "}
+                    page, and then select your default AI models.
+                </p>
+                <div className="p-2 grid grid-cols-2 sm:grid-cols-3 place-items-center gap-4">
+                    <div className="card card-border bg-base-200 w-full">
+                        <div className="card-body">
+                            <h2 className="card-title">OpenAI</h2>
+                            <p className="hidden sm:block">
+                                A card component has a figure, a body part, and
+                                inside body there are title and actions parts
+                            </p>
+                            <button className="btn btn-primary" disabled={!apiKeys.openai}>
+                                    {selectedModels.openai ? "Added" : "Add"}
+                            </button>
+                        </div>
+                    </div>
+                    <div className="card card-border bg-base-200 w-full">
+                        <div className="card-body">
+                            <h2 className="card-title">Claude</h2>
+                            <p className="hidden sm:block">
+                                A card component has a figure, a body part, and
+                                inside body there are title and actions parts
+                            </p>
+                            <button className="btn btn-primary" disabled={!apiKeys.claude}>
+                                    {selectedModels.claude ? "Added" : "Add"}
+                            </button>
+                        </div>
+                    </div>
+                    <div className="card card-border bg-base-200 w-full">
+                        <div className="card-body">
+                            <h2 className="card-title">Gemini</h2>
+                            <p className="hidden sm:block">
+                                A card component has a figure, a body part, and
+                                inside body there are title and actions parts
+                            </p>
+                            <button className="btn btn-primary" disabled={!apiKeys.gemini}>
+                                    {selectedModels.gemini ? "Added" : "Add"}
+                            </button>
+                        </div>
+                    </div>
+                    <div className="card card-border bg-base-200 w-full">
+                        <div className="card-body">
+                            <h2 className="card-title">OpenAI GPT OSS 120B</h2>
+                            <p className="hidden sm:block">
+                                A card component has a figure, a body part, and
+                                inside body there are title and actions parts
+                            </p>
+                            <button className="btn btn-primary" disabled={!apiKeys.groq}>
+                                    {selectedModels.openaiGptOss120bChat ? "Added" : "Add"}
+                            </button>
+                        </div>
+                    </div>
+                    <div className="card card-border bg-base-200 w-full">
+                        <div className="card-body">
+                            <h2 className="card-title">Meta Llama</h2>
+                            <p className="hidden sm:block">
+                                A card component has a figure, a body part, and
+                                inside body there are title and actions parts
+                            </p>
+                            <button className="btn btn-primary" disabled={!apiKeys.groq}>
+                                    {selectedModels.llama ? "Added" : "Add"}
+                            </button>
+                        </div>
+                        
+                    </div>
+                    <div className="card card-border bg-base-200 w-full">
+                        <div className="card-body">
+                            <h2 className="card-title">Deepseek</h2>
+                            <p className="hidden sm:block">
+                                A card component has a figure, a body part, and
+                                inside body there are title and actions parts
+                            </p>
+                            <button className="btn btn-primary" disabled={!apiKeys.groq}>
+                                    {selectedModels.deepseek ? "Added" : "Add"}
+                            </button>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            {/*<div className="flex gap-1 overflow-auto custom-scrollbar pb-1">
                 <ResponsePanel
                     model="OpenAI"
                     modelIcon={modelIcons.openai}
@@ -181,7 +281,7 @@ export default function Home() {
                     modelIcon={modelIcons.deepseek}
                 />
                 <ResponsePanel model="Claude" modelIcon={modelIcons.claude} />
-            </div>
+            </div>*/}
             <form onSubmit={handleSubmit} className="flex justify-center">
                 <div className="absolute bottom-3 shadow-lg w-[90%] bg-base-200 border rounded-xl flex flex-col items-end p-2 gap-2">
                     <TextareaAutosize

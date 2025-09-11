@@ -28,7 +28,7 @@ const Sidebar = ({ isVisible, setIsVisible, isSidebarHideOnMobile }) => {
                 <div className="">
                     <ul className="flex flex-col gap-1">
                         <li>
-                            <Link href="/app" className="sidebar-link">
+                            <Link href="/new" className="sidebar-link">
                                 <span className="material-symbols-outlined">
                                     edit_square
                                 </span>
@@ -37,21 +37,21 @@ const Sidebar = ({ isVisible, setIsVisible, isSidebarHideOnMobile }) => {
                         </li>
                     </ul>
                 </div>
-                <div className="">
+                <div>
                     <h3 className="text-sm font-semibold">Chats</h3>
                     <ul className="flex flex-col gap-1">
                         <li>
-                            <Link href="/app" className="sidebar-link">
+                            <Link href="/chat/1" className="sidebar-link">
                                 My Chat One
                             </Link>
                         </li>
                         <li>
-                            <Link href="/app" className="sidebar-link">
+                            <Link href="/chat/2" className="sidebar-link">
                                 My Chat Two
                             </Link>
                         </li>
                         <li>
-                            <Link href="/app" className="sidebar-link">
+                            <Link href="/chat/3" className="sidebar-link">
                                 My Chat Three
                             </Link>
                         </li>
