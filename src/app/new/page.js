@@ -199,7 +199,7 @@ const page = () => {
         !["ready", "error"].includes(deepseekChat.status);
 
     return (
-        <div className="relative w-full min-h-[calc(100vh-16px)] border rounded p-2 pt-2 flex flex-col gap-4 overflow-auto">
+        <div className="relative w-full min-h-[calc(100vh-16px)] border rounded p-2 pt-9 flex flex-col gap-4 overflow-auto">
             <div className="flex gap-1 overflow-auto custom-scrollbar pb-1">
                 {models.openai && (
                     <ResponsePanel
