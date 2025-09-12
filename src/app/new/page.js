@@ -289,12 +289,12 @@ const page = () => {
 
             </div>
             <form onSubmit={handleSubmit} className="flex justify-center">
-                <div className="absolute bottom-3 shadow-lg w-[90%] bg-base-200 border rounded-xl flex flex-col items-end p-2 gap-2">
+                <div className="absolute bottom-3 shadow-lg w-[90%] bg-base-200 border rounded-xl flex flex-col items-end p-2 gap-1">
                     <TextareaAutosize
                         rows={1}
                         minRows={1}
                         maxRows={3}
-                        className="w-full p-2 focus:outline-none resize-none text-lg"
+                        className="w-full p-1 focus:outline-none resize-none text-lg"
                         placeholder="Ask me anything..."
                         value={prompt}
                         onChange={(e) => setPrompt(e.target.value)}
