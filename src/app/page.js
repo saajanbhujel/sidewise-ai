@@ -153,8 +153,7 @@ export default function Home() {
                                 {modelIcons.openai} OpenAI
                             </h2>
                             <p className="hidden sm:block">
-                                A card component has a figure, a body part, and
-                                inside body there are title and actions parts
+                                GPT-5 model with advanced reasoning capabilities. (Using OpenAI API)
                             </p>
                             {models.openai ? (
                                 <button
@@ -185,8 +184,7 @@ export default function Home() {
                                 {modelIcons.claude} Claude
                             </h2>
                             <p className="hidden sm:block">
-                                A card component has a figure, a body part, and
-                                inside body there are title and actions parts
+                                Anthropic's thoughtful AI assistant with excellent contextual understanding. (Using OpenRouter)
                             </p>
                             {models.claude ? (
                                 <button
@@ -217,8 +215,7 @@ export default function Home() {
                                 {modelIcons.gemini} Gemini
                             </h2>
                             <p className="hidden sm:block">
-                                A card component has a figure, a body part, and
-                                inside body there are title and actions parts
+                                Google's powerful conversational AI with strong analytical abilities. (Using Google Gemini API)
                             </p>
                             {models.gemini ? (
                                 <button
@@ -249,8 +246,7 @@ export default function Home() {
                                 {modelIcons.openai} GPT OSS
                             </h2>
                             <p className="hidden sm:block">
-                                A card component has a figure, a body part, and
-                                inside body there are title and actions parts
+                                Lightning-fast open-source model optimized for quick responses. (Using Groq)
                             </p>
                             {models.openaiGptOss120b ? (
                                 <button
@@ -281,8 +277,7 @@ export default function Home() {
                                 {modelIcons.llama} Meta Llama
                             </h2>
                             <p className="hidden sm:block">
-                                A card component has a figure, a body part, and
-                                inside body there are title and actions parts
+                                Meta's open-source model for everyday general use. (Using Groq)
                             </p>
                             {models.llama ? (
                                 <button
@@ -313,8 +308,7 @@ export default function Home() {
                                 {modelIcons.deepseek} Deepseek
                             </h2>
                             <p className="hidden sm:block">
-                                A card component has a figure, a body part, and
-                                inside body there are title and actions parts
+                                Cutting-edge high-performance model specializing in complex reasoning. (Using Groq)
                             </p>
                             {models.deepseek ? (
                                 <button
