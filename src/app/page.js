@@ -85,26 +85,22 @@ export default function Home() {
         ),
     };
 
-    /*const [apiKeys, setApiKeys] = useState({
-        groq: localStorage.getItem("groq_api_key") || "",
-        openai: localStorage.getItem("openai_api_key") || "",
-        claude: localStorage.getItem("claude_api_key") || "",
-        gemini: localStorage.getItem("gemini_api_key") || "",
-    });*/
+    const [apiKeys, setApiKeys] = useState({
+        groq: "",
+        openai: "",
+        claude: "",
+        gemini: "",
+    });
 
-    const [apiKeys, setApiKeys] = useState(() => {
-    if (typeof window !== "undefined") {
-      // Only access localStorage on the client
-      return {
-        groq: localStorage.getItem("groq_api_key") || "",
-        openai: localStorage.getItem("openai_api_key") || "",
-        claude: localStorage.getItem("claude_api_key") || "",
-        gemini: localStorage.getItem("gemini_api_key") || "",
-      };
-    }
-    // Fallback for SSR
-    return { groq: "", openai: "", claude: "", gemini: "" };
-  });
+    useEffect(() => {
+        const savedApiKeys = {
+            groq: localStorage.getItem("groq_api_key") || "",
+            openai: localStorage.getItem("openai_api_key") || "",
+            claude: localStorage.getItem("claude_api_key") || "",
+            gemini: localStorage.getItem("gemini_api_key") || "",
+        };
+        setApiKeys(savedApiKeys);
+    }, []);
 
     const [models, setModels] = useState({
         openai: false,
@@ -123,8 +119,7 @@ export default function Home() {
             llama: localStorage.getItem("llama_is_selected") === "true",
             deepseek: localStorage.getItem("deepseek_is_selected") === "true",
             openaiGptOss120b:
-                localStorage.getItem("openaiGptOss120b_is_selected") ===
-                "true",
+                localStorage.getItem("openaiGptOss120b_is_selected") === "true",
         });
     }, []);
 
