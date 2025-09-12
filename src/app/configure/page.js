@@ -6,7 +6,7 @@ const page = () => {
     const [apiKeys, setApiKeys] = useState({
         groq: "",
         openai: "",
-        claude: "",
+        openrouter: "",
         gemini: "",
     });
 
@@ -14,23 +14,11 @@ const page = () => {
         const savedApiKeys = {
             groq: localStorage.getItem("groq_api_key") || "",
             openai: localStorage.getItem("openai_api_key") || "",
-            claude: localStorage.getItem("claude_api_key") || "",
+            openrouter: localStorage.getItem("openrouter_api_key") || "",
             gemini: localStorage.getItem("gemini_api_key") || "",
         };
         setApiKeys(savedApiKeys);
     }, []);
-
-    /*useEffect(() => {
-    if (typeof window !== "undefined") {
-      const savedApiKeys = {
-        groq: localStorage.getItem("groq_api_key") || "",
-        openai: localStorage.getItem("openai_api_key") || "",
-        claude: localStorage.getItem("claude_api_key") || "",
-        gemini: localStorage.getItem("gemini_api_key") || "",
-      };
-      setApiKeys(savedApiKeys);
-    }
-  }, []);*/
 
 
     function handleChange(model, e) {
@@ -39,7 +27,7 @@ const page = () => {
     }
 
     return (
-        <div className="w-full border rounded p-2 pt-10 flex flex-col gap-4 overflow-auto">
+        <div className="w-full border rounded p-2 sm:pt-10 pt-12 flex flex-col gap-4 overflow-auto">
             <div className="flex flex-col gap-2 p-2 w-full text-center">
                 <h1 className="text-5xl font-bold">Configure</h1>
                 <p className="text-lg">
@@ -71,10 +59,10 @@ const page = () => {
                     <input
                         className="input w-full"
                         type="password"
-                        placeholder="Enter your Claude API key"
-                        value={apiKeys.claude}
+                        placeholder="Enter your Openrouter API key"
+                        value={apiKeys.openrouter}
                         onChange={function (e) {
-                            handleChange("claude", e);
+                            handleChange("openrouter", e);
                         }}
                     />
                     <input

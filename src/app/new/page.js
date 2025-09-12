@@ -115,28 +115,21 @@ const page = () => {
         openaiGptOss120b: true,
     });
 
-    /*const [apiKeys, setApiKeys] = useState({
-        groq: "",
-        openai: "",
-        claude: "",
-        gemini: "",
-    });
-
-    useEffect(() => {
-        setApiKeys({
-            groq: localStorage.getItem("groq_api_key") || "",
-            openai: localStorage.getItem("openai_api_key") || "",
-            claude: localStorage.getItem("claude_api_key") || "",
-            gemini: localStorage.getItem("gemini_api_key") || "",
-        });
-        isKeysUpdated = true;
-    }, []);*/
 
     const openaiChat = useChat({
         transport: new DefaultChatTransport({
             api: "/api/openai",
             headers: () => ({
                 "X-OPENAI-API-KEY": localStorage.getItem("openai_api_key"),
+            }),
+        }),
+    });
+
+    const claudeChat = useChat({
+        transport: new DefaultChatTransport({
+            api: "/api/claude",
+            headers: () => ({
+                "X-OPENROUTER-API-KEY": localStorage.getItem("openrouter_api_key"),
             }),
         }),
     });
@@ -184,6 +177,7 @@ const page = () => {
         if (!prompt.trim()) return;
 
         if (models.openai && activeModels.openai) openaiChat.sendMessage({ text: prompt });
+        if (models.claude && activeModels.claude) claudeChat.sendMessage({ text: prompt });
         if (models.gemini && activeModels.gemini) geminiChat.sendMessage({ text: prompt });
         if (models.openaiGptOss120b && activeModels.openaiGptOss120b)
             openaiGptOss120bChat.sendMessage({ text: prompt });
@@ -222,7 +216,7 @@ const page = () => {
                     <ResponsePanel
                         model="Claude"
                         modelIcon={modelIcons.claude}
-                        modelMessages={openaiChat.messages}
+                        modelMessages={claudeChat.messages}
                         onToggle={() =>
                             setActiveModels((prev) => ({
                                 ...prev,

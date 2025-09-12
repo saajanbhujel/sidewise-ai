@@ -3,7 +3,7 @@ import Conversation from "./Conversation";
 
 const ResponsePanel = ({ model, modelMessages, onToggle, modelIcon }) => {
     return (
-        <div className="border rounded-xl w-[max(32%,350px)] min-w-[max(32%,350px)]">
+        <div className="border rounded-xl sm:w-[max(32%,350px)] sm:min-w-[max(32%,350px)] w-[300px] min-w-[300px]">
             <div className="border rounded-xl shadow-md p-2 flex gap-2 justify-between items-center">
                 <div className="flex items-center gap-2">
                     {modelIcon}

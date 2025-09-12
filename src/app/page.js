@@ -1,5 +1,6 @@
 "use client";
 
+import { openrouter } from "@openrouter/ai-sdk-provider";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -88,7 +89,7 @@ export default function Home() {
     const [apiKeys, setApiKeys] = useState({
         groq: "",
         openai: "",
-        claude: "",
+        openrouter: "",
         gemini: "",
     });
 
@@ -96,7 +97,7 @@ export default function Home() {
         const savedApiKeys = {
             groq: localStorage.getItem("groq_api_key") || "",
             openai: localStorage.getItem("openai_api_key") || "",
-            claude: localStorage.getItem("claude_api_key") || "",
+            openrouter: localStorage.getItem("openrouter_api_key") || "",
             gemini: localStorage.getItem("gemini_api_key") || "",
         };
         setApiKeys(savedApiKeys);
@@ -136,8 +137,8 @@ export default function Home() {
     }
 
     return (
-        <div className="relative w-full min-h-[calc(100vh-16px)] border rounded p-2 pt-10 flex flex-col gap-4 overflow-auto">
-            <div className="flex flex-col gap-10">
+        <div className="relative w-full min-h-[calc(100vh-16px)] border rounded p-2 sm:pt-10 pt-12 flex flex-col gap-4 overflow-auto">
+            <div className="flex flex-col gap-8">
                 <p className="text-center text-lg">
                     Start by adding your API keys on the{" "}
                     <Link className="link link-primary" href="/configure">
@@ -190,7 +191,7 @@ export default function Home() {
                             {models.claude ? (
                                 <button
                                     className="btn btn-error"
-                                    disabled={!apiKeys.claude}
+                                    disabled={!apiKeys.openrouter}
                                     onClick={function (e) {
                                         removeModel("claude");
                                     }}
@@ -200,7 +201,7 @@ export default function Home() {
                             ) : (
                                 <button
                                     className="btn btn-primary"
-                                    disabled={!apiKeys.claude}
+                                    disabled={!apiKeys.openrouter}
                                     onClick={function (e) {
                                         addModel("claude");
                                     }}
