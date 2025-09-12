@@ -3,8 +3,8 @@ import Conversation from "./Conversation";
 
 const ResponsePanel = ({ model, modelMessages, modelError, onToggle, modelIcon }) => {
     return (
-        <div className="border rounded-xl sm:w-[max(32%,350px)] sm:min-w-[max(32%,350px)] w-[300px] min-w-[300px]">
-            <div className="border rounded-xl shadow-md p-2 flex gap-2 justify-between items-center">
+        <div className="border rounded-xl sm:w-[max(32%,350px)] sm:min-w-[max(32%,350px)] w-[300px] min-w-[300px] overflow-auto">
+            <div className="border rounded-xl shadow-md p-2 flex gap-2 justify-between items-center sticky top-0 bg-base-200">
                 <div className="flex items-center gap-2">
                     {modelIcon}
                     <h2 className="font-semibold">{model}</h2>
