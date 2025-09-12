@@ -2,7 +2,7 @@ import React from "react";
 
 const Conversation = ({ model, modelMessages, modelError }) => {
     return (
-        <div className="p-2 h-120 text-base-content overflow-auto custom-scrollbar flex flex-col-reverse no-arrows">
+        <div className="p-2 lg:h-120 h-100 text-base-content overflow-auto custom-scrollbar flex flex-col-reverse no-arrows">
             <div className="flex flex-col space-y-2">
                 {modelMessages?.map((message) => (
                     <div
