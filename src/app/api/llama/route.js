@@ -1,5 +1,5 @@
 import { convertToModelMessages, streamText } from "ai";
-import { createGroq } from '@ai-sdk/groq';
+import { createGroq } from "@ai-sdk/groq";
 
 export async function POST(req) {
     try {

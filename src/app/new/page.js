@@ -191,9 +191,12 @@ const page = () => {
     };
 
     const isDisabled =
-        openaiChat.status !== "ready" ||
-        openaiGptOss120bChat.status !== "ready" ||
-        llamaChat.status !== "ready";
+        !["ready", "error"].includes(openaiChat.status) ||
+        !["ready", "error"].includes(claudeChat.status) ||
+        !["ready", "error"].includes(geminiChat.status) ||
+        !["ready", "error"].includes(openaiGptOss120bChat.status) ||
+        !["ready", "error"].includes(llamaChat.status) ||
+        !["ready", "error"].includes(deepseekChat.status);
 
     return (
         <div className="relative w-full min-h-[calc(100vh-16px)] border rounded p-2 pt-10 flex flex-col gap-4 overflow-auto">
@@ -260,6 +263,7 @@ const page = () => {
                     model="LLaMA (Meta)"
                     modelIcon={modelIcons.llama}
                     modelMessages={llamaChat.messages}
+                    modelError={llamaChat.error}
                     onToggle={() =>
                         setActiveModels((prev) => ({
                             ...prev,

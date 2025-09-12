@@ -1,7 +1,7 @@
 import React from "react";
 import Conversation from "./Conversation";
 
-const ResponsePanel = ({ model, modelMessages, onToggle, modelIcon }) => {
+const ResponsePanel = ({ model, modelMessages, modelError, onToggle, modelIcon }) => {
     return (
         <div className="border rounded-xl sm:w-[max(32%,350px)] sm:min-w-[max(32%,350px)] w-[300px] min-w-[300px]">
             <div className="border rounded-xl shadow-md p-2 flex gap-2 justify-between items-center">
@@ -23,7 +23,7 @@ const ResponsePanel = ({ model, modelMessages, onToggle, modelIcon }) => {
                     </button>
                 </div>
             </div>
-            <Conversation model={model} modelMessages={modelMessages} />
+            <Conversation model={model} modelMessages={modelMessages} modelError={modelError} />
         </div>
     );
 };
