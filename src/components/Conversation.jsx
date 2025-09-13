@@ -2,7 +2,7 @@ import React from "react";
 
 const Conversation = ({ model, modelMessages, modelError }) => {
     return (
-        <div className="p-2 2xl:h-120 h-90 text-base-content overflow-auto custom-scrollbar flex flex-col-reverse">
+        <div className="p-2 2xl:h-122 h-90 text-base-content overflow-auto custom-scrollbar flex flex-col-reverse">
             <div className="flex flex-col space-y-2">
                 {modelMessages?.map((message) => (
                     <div
@@ -18,9 +18,9 @@ const Conversation = ({ model, modelMessages, modelError }) => {
                                 case "text":
                                     return (
                                         <div
-                                            className={`bg-base-100 rounded-2xl p-2 max-w-[90%] border-2 shadow-sm ${
+                                            className={`bg-base-200 rounded-2xl p-2 max-w-[90%] border-2 shadow-sm ${
                                                 message.role == "user"
-                                                    ? "rounded-tr-sm border-blue-600"
+                                                    ? "rounded-tr-sm border-accent/90"
                                                     : "rounded-tl-sm border-base-content/30"
                                             } `}
                                             key={`${message.id}-${index}`}

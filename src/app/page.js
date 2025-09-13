@@ -137,7 +137,7 @@ export default function Home() {
     }
 
     return (
-        <div className="relative w-full min-h-[calc(100vh-16px)] border rounded p-2 sm:pt-10 pt-12 flex flex-col gap-4 overflow-auto">
+        <div className="relative w-full min-h-[calc(100vh-16px)] border-2 border-primary rounded p-2 sm:pt-10 pt-12 flex flex-col gap-4 overflow-auto">
             <div className="flex flex-col gap-8">
                 <p className="text-center text-lg">
                     Start by adding your API keys on the{" "}
@@ -157,7 +157,7 @@ export default function Home() {
                             </p>
                             {models.openai ? (
                                 <button
-                                    className="btn btn-error"
+                                    className="btn btn-error shadow"
                                     disabled={!apiKeys.openai}
                                     onClick={function (e) {
                                         removeModel("openai");
@@ -167,7 +167,7 @@ export default function Home() {
                                 </button>
                             ) : (
                                 <button
-                                    className="btn btn-primary"
+                                    className="btn btn-primary shadow"
                                     disabled={!apiKeys.openai}
                                     onClick={function (e) {
                                         addModel("openai");
@@ -188,7 +188,7 @@ export default function Home() {
                             </p>
                             {models.claude ? (
                                 <button
-                                    className="btn btn-error"
+                                    className="btn btn-error shadow"
                                     disabled={!apiKeys.openrouter}
                                     onClick={function (e) {
                                         removeModel("claude");
@@ -198,7 +198,7 @@ export default function Home() {
                                 </button>
                             ) : (
                                 <button
-                                    className="btn btn-primary"
+                                    className="btn btn-primary shadow"
                                     disabled={!apiKeys.openrouter}
                                     onClick={function (e) {
                                         addModel("claude");
@@ -219,7 +219,7 @@ export default function Home() {
                             </p>
                             {models.gemini ? (
                                 <button
-                                    className="btn btn-error"
+                                    className="btn btn-error shadow"
                                     disabled={!apiKeys.gemini}
                                     onClick={function (e) {
                                         removeModel("gemini");
@@ -229,7 +229,7 @@ export default function Home() {
                                 </button>
                             ) : (
                                 <button
-                                    className="btn btn-primary"
+                                    className="btn btn-primary shadow"
                                     disabled={!apiKeys.gemini}
                                     onClick={function (e) {
                                         addModel("gemini");
@@ -250,7 +250,7 @@ export default function Home() {
                             </p>
                             {models.openaiGptOss120b ? (
                                 <button
-                                    className="btn btn-error"
+                                    className="btn btn-error shadow"
                                     disabled={!apiKeys.groq}
                                     onClick={function (e) {
                                         removeModel("openaiGptOss120b");
@@ -260,7 +260,7 @@ export default function Home() {
                                 </button>
                             ) : (
                                 <button
-                                    className="btn btn-primary"
+                                    className="btn btn-primary shadow"
                                     disabled={!apiKeys.groq}
                                     onClick={function (e) {
                                         addModel("openaiGptOss120b");
@@ -281,7 +281,7 @@ export default function Home() {
                             </p>
                             {models.llama ? (
                                 <button
-                                    className="btn btn-error"
+                                    className="btn btn-error shadow"
                                     disabled={!apiKeys.groq}
                                     onClick={function (e) {
                                         removeModel("llama");
@@ -291,7 +291,7 @@ export default function Home() {
                                 </button>
                             ) : (
                                 <button
-                                    className="btn btn-primary"
+                                    className="btn btn-primary shadow"
                                     disabled={!apiKeys.groq}
                                     onClick={function (e) {
                                         addModel("llama");
@@ -312,7 +312,7 @@ export default function Home() {
                             </p>
                             {models.deepseek ? (
                                 <button
-                                    className="btn btn-error"
+                                    className="btn btn-error shadow"
                                     disabled={!apiKeys.groq}
                                     onClick={function (e) {
                                         removeModel("deepseek");
@@ -322,7 +322,7 @@ export default function Home() {
                                 </button>
                             ) : (
                                 <button
-                                    className="btn btn-primary"
+                                    className="btn btn-primary shadow"
                                     disabled={!apiKeys.groq}
                                     onClick={function (e) {
                                         addModel("deepseek");

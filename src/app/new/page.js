@@ -199,7 +199,7 @@ const page = () => {
         !["ready", "error"].includes(deepseekChat.status);
 
     return (
-        <div className="relative w-full min-h-[calc(100vh-16px)] border rounded p-2 pt-9 flex flex-col gap-4 overflow-auto">
+        <div className="relative w-full min-h-[calc(100vh-16px)] border-2 border-primary rounded p-2 pt-9 flex flex-col gap-4 overflow-auto">
             <div className="flex gap-1 overflow-auto custom-scrollbar pb-1">
                 {models.openai && (
                     <ResponsePanel
@@ -289,7 +289,7 @@ const page = () => {
 
             </div>
             <form onSubmit={handleSubmit} className="flex justify-center">
-                <div className="absolute bottom-3 shadow-lg w-[90%] bg-base-200 border rounded-xl flex flex-col items-end p-2 gap-1">
+                <div className="absolute bottom-3 shadow-lg w-[90%] bg-base-200 border border-primary rounded-xl flex flex-col items-end p-2 gap-1">
                     <TextareaAutosize
                         rows={1}
                         minRows={1}

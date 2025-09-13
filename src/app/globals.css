@@ -1,5 +1,33 @@
 @import "tailwindcss";
 @plugin "daisyui";
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+  --color-base-100: oklch(96.02% 0.032 124.46);
+  --color-base-200: oklch(93.02% 0.032 124.46);
+  --color-base-300: oklch(90.02% 0.032 124.46);
+  --color-base-content: oklch(19.22% 0.032 128.17);
+  --color-primary: #4e6d22;
+  --color-primary-content: #f1f8e8;
+  --color-secondary: #80d698;
+  --color-accent: #329f7b;
+  --color-error: #e05e5c;
+  --color-error-content: #f1f8e8;
+}
+
+@plugin "daisyui/theme" {
+  name: "dark";
+  --color-base-100: oklch(22.80% 0.042 127.17);
+  --color-base-200: oklch(19.80% 0.042 127.17);
+  --color-base-300: oklch(16.80% 0.042 127.17);
+  --color-base-content: oklch(96.95% 0.022 126.22);
+  --color-primary: #bedd92;
+  --color-primary-content: #101707;
+  --color-secondary: #297f42;
+  --color-accent: #60cda9;
+  --color-error: #e05e5c;
+  --color-error-content: #f1f8e8;
+}
 
 /*@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));*/
 
@@ -16,7 +44,7 @@ body{
 }
 
 .sidebar-link {
-  @apply flex items-center border rounded text-base px-1 py-2 gap-2 hover:bg-gray-400;
+  @apply flex items-center border-2 border-primary rounded text-base px-1 py-2 gap-2 hover:bg-primary hover:text-primary-content;
 }
 
 .custom-scrollbar {

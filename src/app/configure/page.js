@@ -27,7 +27,7 @@ const page = () => {
     }
 
     return (
-        <div className="w-full border rounded p-2 sm:pt-10 pt-12 flex flex-col gap-4 overflow-auto">
+        <div className="w-full border-2 border-primary rounded p-2 sm:pt-10 pt-12 flex flex-col gap-4 overflow-auto">
             <div className="flex flex-col gap-2 p-2 w-full text-center">
                 <h1 className="text-5xl font-bold">Configure</h1>
                 <p className="text-lg">
@@ -37,7 +37,7 @@ const page = () => {
                 </p>
             </div>
             <div className="flex ">
-                <div className="p-4 flex flex-col gap-2 border rounded-lg shadow-lg w-[90%] sm:w-[80%] m-auto">
+                <div className="p-4 flex flex-col gap-2 border border-primary rounded-lg shadow-lg w-[90%] sm:w-[80%] m-auto">
                     <input
                         className="input w-full"
                         type="password"

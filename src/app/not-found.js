@@ -25,7 +25,7 @@ export default function NotFound() {
                         </Link>
                         <Link
                             href="/new"
-                            className="btn btn-soft btn-primary inline-flex font-medium rounded-lg text-sm px-5 py-2.5 text-center my-4"
+                            className="btn btn-primary inline-flex font-medium rounded-lg text-sm px-5 py-2.5 text-center my-4"
                         >
                             Create a New Chat
                         </Link>
