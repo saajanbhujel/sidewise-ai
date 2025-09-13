@@ -13,7 +13,7 @@ const Sidebar = ({ isVisible, setIsVisible, isSidebarHideOnMobile }) => {
         >
             <div className="flex flex-col gap-8">
                 <div className="flex justify-between">
-                    <h2 className="font-medium">LetLang</h2>
+                    <h2 className="font-medium">Sidewise AI</h2>
 
                     <button className="flex items-start cursor-pointer">
                         <span
