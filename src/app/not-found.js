@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function NotFound() {
     return (
-        <div className="w-full border rounded p-2 sm:pt-10 pt-12 flex flex-col gap-4 overflow-auto">
+        <div className="w-full border-2 border-primary rounded p-2 sm:pt-10 pt-12 flex flex-col gap-4 overflow-auto">
             <section className="">
                 <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
                     <div className="mx-auto max-w-screen-sm text-center">

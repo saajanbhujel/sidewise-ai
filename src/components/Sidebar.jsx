@@ -9,7 +9,7 @@ const Sidebar = ({ isVisible, setIsVisible, isSidebarHideOnMobile }) => {
         <div
             className={`md:flex ${
                 isSidebarHideOnMobile ? "hidden" : "flex"
-            } border-2 border-primary text-xl rounded w-[80%] md:w-[20%] bg-base-100 z-50 fixed h-[calc(100vh-16px)] md:static flex-col justify-between p-2`}
+            } border-2 border-primary text-xl rounded w-[80%] md:w-[20%] bg-base-100 z-50 fixed h-[calc(100dvh-16px)] md:static flex-col justify-between p-2`}
         >
             <div className="flex flex-col gap-8">
                 <div className="flex justify-between">
