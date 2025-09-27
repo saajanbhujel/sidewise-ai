@@ -21,7 +21,6 @@ const Sidebar = ({ isVisible, setIsVisible, isSidebarHideOnMobile }) => {
     useEffect(() => {
         const savedTheme = localStorage.getItem("theme");
         if(savedTheme){
-            alert(savedTheme);
             const darkTheme = savedTheme === "dark";
             setIsChecked(darkTheme);
             document.documentElement.classList.add(savedTheme)
