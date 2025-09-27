@@ -1,9 +1,32 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const Sidebar = ({ isVisible, setIsVisible, isSidebarHideOnMobile }) => {
+    const [isChecked, setIsChecked] = useState(false);
     const pathName = usePathname();
+
+    const handleTheme = (check) => {
+        setIsChecked(check);
+        const theme = check ? "dark" : "light";
+        if(theme === "dark"){
+            document.documentElement.classList.add("dark");
+        } else{
+            document.documentElement.classList.remove("dark");
+        }
+
+        localStorage.setItem("theme", theme)
+    }
+
+    useEffect(() => {
+        const savedTheme = localStorage.getItem("theme");
+        if(savedTheme){
+            const darkTheme = savedTheme === "dark";
+            setIsChecked(darkTheme);
+            document.documentElement.classList.add(savedTheme)
+        }
+        
+    }, [])
 
     return (
         <div
@@ -73,7 +96,9 @@ const Sidebar = ({ isVisible, setIsVisible, isSidebarHideOnMobile }) => {
                     <li className="p-1">
                         <input
                             type="checkbox"
+                            checked={isChecked}
                             value="dark"
+                            onChange={(e) => handleTheme(e.target.checked)}
                             className="toggle theme-controller"
                         />
                     </li>
